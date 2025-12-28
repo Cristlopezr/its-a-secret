@@ -6,7 +6,11 @@ export const Home = () => {
     return (
         <div className='min-h-screen'>
             <div className='container mx-auto px-4 py-16'>
-                <h1 className='text-6xl font-bold text-center mb-6'>{`It's a Secret!`} 🤫</h1>
+                <h1 className='text-7xl font-black text-center mb-10'>
+                    <span className='bg-gradient-to-r from-violet-500 to-indigo-500 bg-clip-text text-transparent'>
+                        It&apos;s a Secret!
+                    </span> 🤫
+                </h1>
 
                 <h2 className='text-center text-3xl'>The ultimate party game where secrets come out to play!</h2>
                 <p className='text-2xl text-center my-10'>

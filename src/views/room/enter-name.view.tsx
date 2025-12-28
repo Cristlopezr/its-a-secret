@@ -53,9 +53,12 @@ export const EnterNameView = () => {
     };
 
     return (
-        <div className='flex justify-center pt-40 text-center'>
-            <div className='min-w-96 space-y-8'>
-                <h1>Enter your username</h1>
+        <div className='flex flex-col items-center pt-20 text-center gap-10 px-4'>
+            <h1 className='text-5xl font-extrabold mb-4 bg-gradient-to-r from-violet-500 to-indigo-500 bg-clip-text text-transparent'>
+                It&apos;s a Secret!
+            </h1>
+            <div className='min-w-96 space-y-8 bg-secondary/20 p-8 rounded-2xl border border-violet-500/10'>
+                <h2 className='text-2xl font-bold'>Enter your username</h2>
                 <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
                     <Controller
                         control={form.control}
