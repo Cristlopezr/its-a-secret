@@ -13,6 +13,10 @@ export const GameRoomView = () => {
     const hasSubmittedSecret = room.secrets.find(({ playerId }) => playerId === singlePlayer?.id);
 
     useEffect(() => {
+        socket.on('player-disconnected', payload => {
+            setRoom(payload.room);
+        });
+
         socket.on('waiting-secrets', payload => {
             setRoom(payload.room);
         });

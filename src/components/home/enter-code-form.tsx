@@ -26,7 +26,6 @@ export const EnterCodeForm = () => {
     const { setNotification, clearNotifications } = useUIActions();
 
     const onSubmit = (data: z.infer<typeof JoinFormSchema>) => {
-        console.log('ARE WE HERE');
         setIsLoading(true);
         clearNotifications();
         //Callback to handle any errors

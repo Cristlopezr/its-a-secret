@@ -80,7 +80,7 @@ export const EnterNameView = () => {
                     ) : (
                         <>
                             <Button type='submit'>
-                                {singlePlayer && singlePlayer.id === admin.id ? 'Create room' : 'Join room'}
+                                {singlePlayer && singlePlayer.id === admin?.id ? 'Create room' : 'Join room'}
                             </Button>
                             {notifications?.ENTER_NAME && (
                                 <p className='text-destructive font-semibold'>{notifications.ENTER_NAME}</p>
