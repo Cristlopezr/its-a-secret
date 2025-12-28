@@ -2,7 +2,7 @@ import { PlayersList } from '@/components/room/players-list';
 import { Button } from '@/components/ui/button';
 import { audioUrls } from '@/lib/constants/audio-urls';
 import { useAudioActions } from '@/stores/audio.store';
-import { useGameRoom } from '@/stores/game.store';
+import { useGameActions, useGameRoom } from '@/stores/game.store';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 
@@ -10,10 +10,16 @@ export const GameFinishedView = () => {
     const navigate = useNavigate();
     const room = useGameRoom();
     const { setCurrentMusicSrc } = useAudioActions();
+    const { reset } = useGameActions();
 
     useEffect(() => {
         setCurrentMusicSrc(audioUrls.startEnd);
     }, []);
+
+    const onGoHome = () => {
+        reset();
+        navigate('/');
+    };
 
     return (
         <div className='flex flex-col items-center pt-20 pb-10 gap-10 px-8 text-center'>
@@ -31,7 +37,7 @@ export const GameFinishedView = () => {
                 </h3>
                 <PlayersList sortedByScores />
             </div>
-            <Button onClick={() => navigate('/')}>Go to home</Button>
+            <Button onClick={onGoHome}>Go to home</Button>
         </div>
     );
 };

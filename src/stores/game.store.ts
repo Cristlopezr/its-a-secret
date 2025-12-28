@@ -11,6 +11,7 @@ interface GameActions {
     setRoomStatus: (status: Room['status']) => void;
     setRoomCurrentSecretIdx: (currentSecretIdx: number) => void;
     setSessionState: (sessionState: SessionState) => void;
+    reset: () => void;
 }
 
 interface GameState {
@@ -61,6 +62,21 @@ const useGameStore = create<GameState>()(set => ({
                 },
             })),
         setSessionState: sessionState => set(() => ({ sessionState: sessionState })),
+        reset: () =>
+            set(() => ({
+                singlePlayer: undefined,
+                room: {
+                    code: '',
+                    id: '',
+                    status: 'waitingPlayers',
+                    secrets: [],
+                    players: [],
+                    config: [],
+                    maxPlayers: 0,
+                    currentSecretIdx: 0,
+                    scoresPublic: false,
+                },
+            })),
     },
 }));
 

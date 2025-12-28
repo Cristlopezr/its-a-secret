@@ -22,6 +22,9 @@ function App() {
     };
 
     useEffect(() => {
+        if (window.location.pathname !== '/') {
+            window.location.replace('/');
+        }
         initSession();
     }, []);
 
