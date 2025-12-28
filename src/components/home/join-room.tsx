@@ -1,5 +1,5 @@
 import { socket } from '@/lib/socket';
-import { useGameActions, useSinglePlayer } from '@/stores/game.store';
+import { useGameActions, useGameSinglePlayer } from '@/stores/game.store';
 import { useUINotifications } from '@/stores/ui.store';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
@@ -8,7 +8,7 @@ import { EnterCodeForm } from './enter-code-form';
 export const JoinRoom = () => {
     const navigate = useNavigate();
     const { setSinglePlayer, setRoom } = useGameActions();
-    const singlePlayer = useSinglePlayer();
+    const singlePlayer = useGameSinglePlayer();
     const notifications = useUINotifications();
 
     useEffect(() => {

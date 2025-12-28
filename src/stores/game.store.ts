@@ -47,6 +47,6 @@ const useGameStore = create<GameState>()(set => ({
     },
 }));
 
-export const useSinglePlayer = () => useGameStore(state => state.singlePlayer);
-export const useRoom = () => useGameStore(state => state.room);
+export const useGameSinglePlayer = () => useGameStore(state => state.singlePlayer);
+export const useGameRoom = () => useGameStore(state => state.room);
 export const useGameActions = () => useGameStore(state => state.actions);

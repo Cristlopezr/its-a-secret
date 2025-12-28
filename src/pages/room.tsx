@@ -1,3 +1,5 @@
+import { RoomView } from '@/views/room/room.view';
+
 export const Room = () => {
-    return <div>Room</div>;
+    return <RoomView />;
 };
