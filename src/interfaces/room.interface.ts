@@ -11,6 +11,7 @@ export interface Room {
     config: Config[];
     maxPlayers: number;
     currentSecretIdx: number;
+    scoresPublic: boolean;
 }
 
 interface Secret {

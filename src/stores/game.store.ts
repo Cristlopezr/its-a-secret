@@ -7,6 +7,7 @@ type SessionState = 'checking' | 'not-found' | 'ready';
 interface GameActions {
     setSinglePlayer: (player: Player) => void;
     setRoom: (room: Room) => void;
+    updatePlayerScore: (playerId: string, score: number) => void;
     setRoomStatus: (status: Room['status']) => void;
     setRoomCurrentSecretIdx: (currentSecretIdx: number) => void;
     setSessionState: (sessionState: SessionState) => void;
@@ -31,10 +32,20 @@ const useGameStore = create<GameState>()(set => ({
         config: [],
         maxPlayers: 0,
         currentSecretIdx: 0,
+        scoresPublic: false,
     },
     actions: {
         setSinglePlayer: player => set(() => ({ singlePlayer: player })),
         setRoom: room => set(() => ({ room })),
+        updatePlayerScore: (playerId, score) =>
+            set(state => ({
+                room: {
+                    ...state.room,
+                    players: state.room.players.map(p =>
+                        p.id === playerId ? { ...p, score } : p
+                    ),
+                },
+            })),
         setRoomStatus: status =>
             set(state => ({
                 room: {

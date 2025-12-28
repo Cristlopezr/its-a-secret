@@ -2,6 +2,8 @@ import { Button } from '@/components/ui/button';
 import { audioUrls } from '@/lib/constants/audio-urls';
 import { colorVariants, type ColorName } from '@/lib/constants/color-variants';
 import { socket } from '@/lib/socket';
+import { PlayersList } from '@/components/room/players-list';
+import { EyeOff } from 'lucide-react';
 import { useAudioActions } from '@/stores/audio.store';
 import { useGameActions, useGameRoom, useGameSinglePlayer } from '@/stores/game.store';
 import { useEffect, useState } from 'react';
@@ -71,8 +73,22 @@ export const GameInProgressView = () => {
 
     if (timeToStartGame !== 0) {
         return (
-            <div className='text-6xl flex items-center justify-center min-h-screen'>
-                {infoText}: {timeToStartGame}
+            <div className='flex flex-col items-center justify-center min-h-screen gap-8 p-10'>
+                <div className='text-6xl font-bold'>
+                    {infoText}: {timeToStartGame}
+                </div>
+                
+                {room.scoresPublic ? (
+                    <div className='w-full max-w-md bg-secondary/20 p-6 rounded-xl'>
+                        <h2 className='text-2xl font-semibold mb-4'>Current Standings</h2>
+                        <PlayersList sortedByScores />
+                    </div>
+                ) : (
+                    <div className='flex flex-col items-center gap-2 text-muted-foreground'>
+                        <EyeOff className='w-8 h-8' />
+                        <p className='text-xl'>Scores are hidden in this room</p>
+                    </div>
+                )}
             </div>
         );
     }
@@ -96,7 +112,9 @@ export const GameInProgressView = () => {
                 Your answer&apos;s in! But who knows if you&apos;re onto something?
             </div>
             <div className='grid grid-cols-2 py-10 md:grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-5 place-items-center'>
-                {room.players.map(({ id, username, color }) => (
+                {[...room.players]
+                    .sort((a, b) => a.id.localeCompare(b.id))
+                    .map(({ id, username, color }) => (
                     <div
                         key={id}
                         className={`${

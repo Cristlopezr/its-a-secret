@@ -8,7 +8,7 @@ import { GameFinishedView } from './game-finished.view';
 
 export const GameRoomView = () => {
     const room = useGameRoom();
-    const { setRoom } = useGameActions();
+    const { setRoom, updatePlayerScore } = useGameActions();
     const singlePlayer = useGameSinglePlayer();
     const hasSubmittedSecret = room.secrets.find(({ playerId }) => playerId === singlePlayer?.id);
 
@@ -29,10 +29,15 @@ export const GameRoomView = () => {
             setRoom(payload.room);
         });
 
+        socket.on('updated-points', payload => {
+            updatePlayerScore(payload.playerId, payload.score);
+        });
+
         return () => {
             socket.off('waiting-secrets');
             socket.off('secret-submitted');
             socket.off('game-started');
+            socket.off('updated-points');
         };
     }, []);
 
