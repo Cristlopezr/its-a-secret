@@ -30,20 +30,20 @@ export const RoomView = () => {
         };
     }, []);
 
-    useEffect(() => {
+   /*  useEffect(() => {
         if (shouldNavigate.current) {
             navigate('/');
         }
     }, [shouldNavigate.current]);
-
+ */
     if (sessionState === 'checking') {
         return <Loader />;
     }
 
-    if (!singlePlayer || (room.status !== 'waitingPlayers' && room.status !== 'waitingSecrets')) {
+    /* if (!singlePlayer || (room.status !== 'waitingPlayers' && room.status !== 'waitingSecrets')) {
         shouldNavigate.current = true;
         return null;
-    }
+    } */
 
     if (!showRoomView && !singlePlayer?.username) {
         return <EnterNameView />;
