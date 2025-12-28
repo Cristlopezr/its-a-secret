@@ -1,10 +1,10 @@
 import { create } from 'zustand';
 
 export const Scope = {
-    CreateRoom: 'createRoom',
-    JoinRoom: 'joinRoom',
-    EnterName: 'enterName',
-    General: 'general',
+    CreateRoom: 'CREATE_ROOM',
+    JoinRoom: 'JOIN_ROOM',
+    EnterName: 'ENTER_NAME',
+    General: 'GENERAL',
 } as const;
 
 type Scope = (typeof Scope)[keyof typeof Scope];

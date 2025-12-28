@@ -1,5 +1,5 @@
 import { socket } from '@/lib/socket';
-import { useGameStore } from '@/stores/game.store';
+import { useGameActions } from '@/stores/game.store';
 import { Scope, useUIActions, useUINotifications } from '@/stores/ui.store';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
@@ -8,8 +8,7 @@ import { LoaderCircle } from 'lucide-react';
 
 export const CreateRoom = () => {
     const navigate = useNavigate();
-    const setSinglePlayer = useGameStore(state => state.setSinglePlayer);
-    const setRoom = useGameStore(state => state.setRoom);
+    const { setRoom, setSinglePlayer } = useGameActions();
     const [isLoading, setIsLoading] = useState(false);
     const { setNotification, clearNotifications } = useUIActions();
     const notifications = useUINotifications();
@@ -51,7 +50,9 @@ export const CreateRoom = () => {
                     'Create room'
                 )}
             </Button>
-            <p className='text-destructive font-semibold pt-2'>{notifications?.createRoom}</p>
+            {notifications?.CREATE_ROOM && (
+                <p className='text-destructive font-semibold pt-2'>{notifications.CREATE_ROOM}</p>
+            )}
         </div>
     );
 };

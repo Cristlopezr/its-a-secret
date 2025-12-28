@@ -5,9 +5,9 @@ export const SecretFormSchema = z.object({
         .string()
         .trim()
         .min(5, {
-            message: 'Secret must be at least 5 characters.',
+            error: 'Secret must be at least 5 characters.',
         })
         .max(300, {
-            message: 'Secret must not be longer than 300 characters.',
+            error: 'Secret must not be longer than 300 characters.',
         }),
 });

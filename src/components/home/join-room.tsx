@@ -1,16 +1,15 @@
 import { socket } from '@/lib/socket';
-import { useGameStore } from '@/stores/game.store';
-import { useUiStore } from '@/stores/ui.store';
+import { useGameActions, useSinglePlayer } from '@/stores/game.store';
+import { useUINotifications } from '@/stores/ui.store';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { EnterCodeForm } from './enter-code-form';
 
 export const JoinRoom = () => {
     const navigate = useNavigate();
-    const setSinglePlayer = useGameStore(state => state.setSinglePlayer);
-    const singlePlayer = useGameStore(state => state.singlePlayer);
-    const setRoom = useGameStore(state => state.setRoom);
-    const notifications = useUiStore(state => state.notifications);
+    const { setSinglePlayer, setRoom } = useGameActions();
+    const singlePlayer = useSinglePlayer();
+    const notifications = useUINotifications();
 
     useEffect(() => {
         socket.on('correct-code', payload => {
@@ -30,7 +29,9 @@ export const JoinRoom = () => {
         <div>
             <p className='mb-2'>Join a Room</p>
             <EnterCodeForm />
-            <p className='text-destructive font-semibold pt-2'>{notifications?.joinRoom}</p>
+            {notifications?.JOIN_ROOM && (
+                <p className='text-destructive font-semibold pt-2'>{notifications.JOIN_ROOM}</p>
+            )}
         </div>
     );
 };
